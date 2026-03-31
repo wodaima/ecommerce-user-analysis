@@ -1,29 +1,31 @@
-# 电商用户行为分析
+# E-Commerce User Behavior Analysis
 
-**从数据到决策：基于 RFM 模型与 K-Means 聚类的用户分层与增长策略分析**
+**[中文版 →](README_CN.md)**
 
-> 使用 UCI Online Retail II 数据集（107万条真实交易记录），完成从数据清洗到可落地产品策略的完整分析闭环。
+**Data-Driven Customer Segmentation & Growth Strategy Using RFM + K-Means Clustering**
 
----
-
-## 📌 项目背景
-
-在电商场景中，不同用户的价值差异巨大——少数高价值客户往往贡献绝大部分收入。本项目通过数据分析验证了这一判断，并基于用户分层产出了差异化的运营策略建议。
-
-**核心发现：22% 的用户贡献了 68% 的收入。**
+> Analyzed ~1M real transaction records from the UCI Online Retail II dataset, delivering a complete pipeline from data cleaning to actionable product strategy recommendations.
 
 ---
 
-## 🔬 分析流程
+## 📌 Background
+
+In e-commerce, customer value varies dramatically — a small number of high-value customers often account for the majority of revenue. This project validates that hypothesis through data and produces differentiated operational strategies based on customer segmentation.
+
+**Key Finding: 22% of customers contribute 68% of total revenue.**
+
+---
+
+## 🔬 Analysis Pipeline
 
 ```mermaid
 graph LR
-    A[📥 原始数据<br/>107万条交易记录] --> B[🧹 数据清洗<br/>处理缺失值/退货/异常]
-    B --> C[📊 探索性分析 EDA<br/>时间·地域·商品·用户]
-    C --> D[🏷️ RFM 用户分层<br/>Recency·Frequency·Monetary]
-    D --> E[🤖 K-Means 聚类验证<br/>交叉验证分层结果]
-    E --> F[💡 产品策略建议<br/>差异化运营方案]
-    F --> G[📊 Dashboard<br/>交互式数据看板]
+    A[📥 Raw Data<br/>1.07M transactions] --> B[🧹 Data Cleaning<br/>Missing values · Returns · Outliers]
+    B --> C[📊 EDA<br/>Time · Geography · Products · Users]
+    C --> D[🏷️ RFM Segmentation<br/>Recency · Frequency · Monetary]
+    D --> E[🤖 K-Means Validation<br/>Cross-verify segments]
+    E --> F[💡 Strategy<br/>Differentiated action plans]
+    F --> G[📊 Dashboard<br/>Interactive visualization]
 
     style A fill:#1e1b4b,stroke:#818cf8,color:#e2e8f0
     style B fill:#1e1b4b,stroke:#818cf8,color:#e2e8f0
@@ -36,119 +38,118 @@ graph LR
 
 ---
 
-## 📈 关键发现
+## 📈 Key Findings
 
-| 维度 | 发现 | 产品启示 |
-|------|------|---------|
-| ⏰ 时间 | 每年 9-11 月销售额攀升 40%+，11 月达峰值 | Q3 开始备战圣诞营销 |
-| 🌍 地域 | 英国贡献 83% 收入，海外市场零散 | 海外扩张需区分零售与批发 |
-| 📦 商品 | 20% 商品贡献 78% 收入 | 推荐系统聚焦头部商品 |
-| 👥 用户 | 幂律分布，中位数消费仅 £899 | 不能用平均用户设计策略 |
-
----
-
-## 🏷️ 用户分层结果
-
-通过 RFM 模型将 5,878 名客户分为 8 个群体：
-
-| 群体 | 人数 | 收入占比 | 核心策略 |
-|------|------|---------|---------|
-| 💎 高价值忠诚客户 | 1,300 | 68.4% | VIP权益 · 个性化推荐 · 积分计划 |
-| 🌱 潜力客户 | 975 | 13.8% | 阶梯激励 · 品类拓展 · 限时优惠 |
-| 🚨 流失风险高价值 | 227 | 5.7% | 紧急召回 · 专属优惠 · 原因回访 |
-| 👤 一般客户 | 1,102 | 4.6% | 常规维护 |
-| 💤 沉睡客户 | 1,523 | 3.8% | 低成本触达 · 分批测试 |
-| 👋 新客户 | 443 | 2.2% | 新手引导 · 二单激励 |
-| 🔄 高频低消客户 | 182 | 0.9% | 交叉销售 · 提升客单价 |
-| ⚠️ 流失风险一般价值 | 126 | 0.6% | 观望 · 低优先级 |
+| Dimension | Finding | Product Implication |
+|-----------|---------|-------------------|
+| ⏰ Time | Sales surge 40%+ during Sep–Nov (Christmas season), peaking in Nov | Begin holiday marketing prep in Q3 |
+| 🌍 Geography | UK accounts for 83% of revenue | Overseas expansion requires retail vs. wholesale segmentation |
+| 📦 Products | Top 20% of products drive 78% of revenue | Recommendation engine should focus on top SKUs |
+| 👥 Users | Power-law distribution; median spend only £899 | Cannot design strategy around the "average user" |
 
 ---
 
-## 🤖 K-Means 聚类验证
+## 🏷️ Customer Segments
 
-使用 K-Means（K=5）对 RFM 数据进行无监督聚类，与手动分层交叉验证：
+RFM analysis segmented 5,878 customers into 8 groups:
 
-- ✅ **一致**：沉睡客户的 87% 被两种方法同时识别
-- 🔍 **新发现**：K-Means 识别出 4 名"极端 VIP"（人均消费 £43 万，疑似批发客户）和 24 名"超级大客户"（人均 £10 万），RFM 未能区分这些极端群体
-- 💡 **结论**：RFM 适合日常运营（规则清晰），K-Means 补充发现隐藏模式，两者结合效果最佳
+| Segment | Count | Revenue Share | Strategy |
+|---------|-------|--------------|----------|
+| 💎 Loyal High-Value | 1,300 | 68.4% | VIP perks · Personalized recs · Loyalty program |
+| 🌱 High Potential | 975 | 13.8% | Milestone rewards · Category expansion · Flash sales |
+| 🚨 At-Risk High-Value | 227 | 5.7% | Urgent win-back · Exclusive coupons · Churn interviews |
+| 👤 Regular | 1,102 | 4.6% | Standard maintenance |
+| 💤 Dormant | 1,523 | 3.8% | Low-cost outreach · Batch testing |
+| 👋 New | 443 | 2.2% | Onboarding emails · Second-order incentives |
+| 🔄 Frequent Low-Spend | 182 | 0.9% | Cross-sell · AOV uplift |
+| ⚠️ At-Risk Regular | 126 | 0.6% | Monitor · Low priority |
 
 ---
 
-## 💡 策略优先级
+## 🤖 K-Means Clustering Validation
+
+Applied K-Means (K=5) on standardized RFM features to cross-validate the rule-based segmentation:
+
+- ✅ **Consistent**: 87% of dormant customers were identified by both methods
+- 🔍 **New discovery**: K-Means detected 4 "extreme VIPs" (avg. spend £430K, likely wholesale) and 24 "super customers" (avg. £100K) that RFM failed to distinguish
+- 💡 **Conclusion**: RFM excels in interpretability for daily operations; K-Means uncovers hidden patterns and extreme outliers. Best used in combination.
+
+---
+
+## 💡 Strategy Prioritization
 
 ```
-P0 🚨 流失风险高价值  →  本周启动召回（227人 · 已验证的高LTV用户）
-P1 💎 高价值忠诚客户  →  本月上线VIP体系（1,300人 · 收入命脉）
-P2 🌱 潜力客户       →  本月启动阶梯激励（975人 · 最大增量来源）
-P3 👋 新客户         →  持续运营二单转化（443人 · 培育长期价值）
-P4 💤 沉睡客户       →  分批测试低成本触达（1,523人 · 不过度投入）
+P0 🚨 At-Risk High-Value    →  Win-back this week  (227 · proven high-LTV users)
+P1 💎 Loyal High-Value      →  Launch VIP program   (1,300 · revenue lifeline)
+P2 🌱 High Potential        →  Milestone incentives (975 · largest growth pool)
+P3 👋 New Customers         →  Second-order nudge   (443 · long-term cultivation)
+P4 💤 Dormant               →  Low-cost batch test  (1,523 · don't over-invest)
 
-核心原则：80% 资源投入 P0-P2，覆盖 87.9% 收入
+Core principle: Allocate 80% of resources to P0–P2, covering 87.9% of revenue.
 ```
 
 ---
 
-## 🛠️ 技术栈
+## 🛠️ Tech Stack
 
-| 模块 | 工具 |
-|------|------|
-| 数据处理 | Python · pandas · numpy |
-| 可视化 | matplotlib · seaborn · plotly |
-| 机器学习 | scikit-learn（KMeans · StandardScaler · PCA） |
+| Module | Tools |
+|--------|-------|
+| Data Processing | Python · pandas · numpy |
+| Visualization | matplotlib · seaborn · plotly |
+| Machine Learning | scikit-learn (KMeans · StandardScaler · PCA) |
 | Dashboard | Streamlit |
 
 ---
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 ecommerce-user-analysis/
 ├── notebooks/
-│   ├── 01_data_cleaning.ipynb    # 数据清洗
-│   ├── 02_eda.ipynb              # 探索性分析
-│   ├── 03_rfm_analysis.ipynb     # RFM 用户分层
-│   ├── 04_clustering.ipynb       # K-Means 聚类验证
-│   └── 05_insights.ipynb         # 产品策略建议
+│   ├── 01_data_cleaning.ipynb    # Data cleaning & preprocessing
+│   ├── 02_eda.ipynb              # Exploratory data analysis
+│   ├── 03_rfm_analysis.ipynb     # RFM customer segmentation
+│   ├── 04_clustering.ipynb       # K-Means clustering validation
+│   └── 05_insights.ipynb         # Product strategy recommendations
 ├── dashboard/
-│   └── app.py                    # Streamlit Dashboard
-├── data/                         # 数据目录（未上传）
-└── docs/                         # 文档与截图
+│   └── app.py                    # Streamlit interactive dashboard
+├── data/                         # Data directory (not uploaded)
+└── docs/                         # Documentation & screenshots
 ```
 
 ---
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
 ```bash
-# 克隆项目
+# Clone
 git clone https://github.com/wodaima/ecommerce-user-analysis.git
 cd ecommerce-user-analysis
 
-# 创建虚拟环境
+# Environment
 python -m venv .venv
 .venv\Scripts\activate        # Windows
 # source .venv/bin/activate   # Mac/Linux
 
-# 安装依赖
+# Dependencies
 pip install pandas numpy matplotlib seaborn plotly scikit-learn streamlit openpyxl jupyter
 
-# 下载数据集
-# 从 https://archive.ics.uci.edu/dataset/502/online+retail+ii 下载
-# 将 online_retail_II.xlsx 放入 data/ 目录
+# Data — download from link below and place in data/
+# https://archive.ics.uci.edu/dataset/502/online+retail+ii
 
-# 运行分析（按顺序执行 Notebook）
+# Run notebooks
 jupyter notebook
 
-# 启动 Dashboard
+# Launch dashboard
 cd dashboard
 streamlit run app.py
 ```
 
 ---
 
-## 📊 Dashboard 预览
+## 📊 Dashboard Preview
 
-> 截图/GIF 待补充
+> Screenshots / GIF coming soon
 
 ---
 
